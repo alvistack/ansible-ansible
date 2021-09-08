@@ -13,13 +13,6 @@ try:
 except ImportError:
     TYPE_CHECKING = False
 
-if TYPE_CHECKING:
-    from typing import Iterable, List, NamedTuple, Optional, Union
-    from ansible.galaxy.collection.concrete_artifact_manager import (
-        ConcreteArtifactsManager,
-    )
-    from ansible.galaxy.collection.galaxy_api_proxy import MultiGalaxyAPIProxy
-
 from ansible.galaxy.dependency_resolution.dataclasses import (
     Candidate,
     Requirement,
@@ -31,6 +24,16 @@ from ansible.galaxy.dependency_resolution.versioning import (
 from ansible.utils.version import SemanticVersion
 
 from resolvelib import AbstractProvider
+
+if TYPE_CHECKING:
+    from typing import Iterable, Iterator, List, Mapping, Sequence, Union
+    from ansible.galaxy.collection.concrete_artifact_manager import (
+        ConcreteArtifactsManager,
+    )
+    from ansible.galaxy.collection.galaxy_api_proxy import MultiGalaxyAPIProxy
+    from resolvelib.providers import Preference
+    from resolvelib.resolvers import RequirementInformation
+    PreferenceInformation = RequirementInformation[Requirement, Candidate]
 
 
 class CollectionDependencyProvider(AbstractProvider):
@@ -126,9 +129,11 @@ class CollectionDependencyProvider(AbstractProvider):
 
     def get_preference(
             self,  # type: CollectionDependencyProvider
-            resolution,  # type: Optional[Candidate]
-            candidates,  # type: List[Candidate]
-            information,  # type: List[NamedTuple]
+            identifier,  # type: str
+            resolutions,  # type: Mapping[str, Candidate]
+            candidates,  # type: Mapping[str, Iterator[Candidate]]
+            information,  # type: Mapping[str, Iterable[PreferenceInformation]]
+            backtrack_causes,  # type: Sequence[PreferenceInformation]
     ):  # type: (...) -> Union[float, int]
         """Return sort key function return value for given requirement.
 
@@ -173,6 +178,7 @@ class CollectionDependencyProvider(AbstractProvider):
         the value is, the more preferred this requirement is (i.e. the
         sorting function is called with ``reverse=False``).
         """
+        candidates = list(candidates[identifier])
         if any(
                 candidate in self._preferred_candidates
                 for candidate in candidates
@@ -182,7 +188,7 @@ class CollectionDependencyProvider(AbstractProvider):
             return float('-inf')
         return len(candidates)
 
-    def find_matches(self, requirements):
+    def find_matches(self, identifier, requirements, incompatibilities):
         # type: (List[Requirement]) -> List[Candidate]
         r"""Find all possible candidates satisfying given requirements.
 
@@ -208,6 +214,7 @@ class CollectionDependencyProvider(AbstractProvider):
         # FIXME: its cloned tmp dir. Using only the first one creates
         # FIXME: loops that prevent any further dependency exploration.
         # FIXME: We need to figure out how to prevent this.
+        requirements = list(requirements[identifier])
         first_req = requirements[0]
         fqcn = first_req.fqcn
         # The fqcn is guaranteed to be the same
