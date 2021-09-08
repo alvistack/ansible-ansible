@@ -1,0 +1,5 @@
+python-ansible-core (100:2.11.9-1) UNRELEASED; urgency=medium
+
+  * https://github.com/ansible/ansible/releases/tag/v2.11.9
+
+ -- Wong Hoi Sing Edison <hswong3i@gmail.com>  Tue, 01 Mar 2022 09:02:27 +0800
