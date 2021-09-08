@@ -1,0 +1,49 @@
+#!/usr/bin/make -f
+
+SHELL := /bin/bash
+
+override_dh_auto_install:
+	dh_auto_install
+	install -Dpm755 -d debian/tmp/etc/ansible
+	install -Dpm755 -d debian/tmp/usr/share/ansible/collections
+	install -Dpm755 -d debian/tmp/usr/share/ansible/plugins/action
+	install -Dpm755 -d debian/tmp/usr/share/ansible/plugins/become
+	install -Dpm755 -d debian/tmp/usr/share/ansible/plugins/cache
+	install -Dpm755 -d debian/tmp/usr/share/ansible/plugins/callback
+	install -Dpm755 -d debian/tmp/usr/share/ansible/plugins/cliconf
+	install -Dpm755 -d debian/tmp/usr/share/ansible/plugins/connection
+	install -Dpm755 -d debian/tmp/usr/share/ansible/plugins/doc_fragments
+	install -Dpm755 -d debian/tmp/usr/share/ansible/plugins/filter
+	install -Dpm755 -d debian/tmp/usr/share/ansible/plugins/httpapi
+	install -Dpm755 -d debian/tmp/usr/share/ansible/plugins/inventory
+	install -Dpm755 -d debian/tmp/usr/share/ansible/plugins/lookup
+	install -Dpm755 -d debian/tmp/usr/share/ansible/plugins/module_utils
+	install -Dpm755 -d debian/tmp/usr/share/ansible/plugins/modules
+	install -Dpm755 -d debian/tmp/usr/share/ansible/plugins/netconf
+	install -Dpm755 -d debian/tmp/usr/share/ansible/plugins/strategy
+	install -Dpm755 -d debian/tmp/usr/share/ansible/plugins/terminal
+	install -Dpm755 -d debian/tmp/usr/share/ansible/plugins/test
+	install -Dpm755 -d debian/tmp/usr/share/ansible/plugins/vars
+	install -Dpm755 -d debian/tmp/usr/share/ansible/roles
+	find debian/tmp/usr/lib/python*/*-packages -type d -name '.*' -prune -exec rm -rf {} \;
+	find debian/tmp/usr/lib/python*/*-packages -type f -name '.*' -exec rm -rf {} \;
+	find debian/tmp/usr/lib/python*/*-packages -type f -name '*.orig' -exec rm -rf {} \;
+	find debian/tmp/usr/lib/python*/*-packages -type f -name '*.pem' -exec rm -rf {} \;
+	find debian/tmp/usr/lib/python*/*-packages -type f -name '*.pyc' -exec rm -rf {} \;
+	find debian/tmp/usr/lib/python*/*-packages -type f -name '*.rej' -exec rm -rf {} \;
+	find debian/tmp/usr/lib/python*/*-packages -type f -name '*.swp' -exec rm -rf {} \;
+	find debian/tmp/usr/lib/python*/*-packages -type f -name '*.rst' -exec chmod a-x {} \;
+	find debian/tmp/usr/lib/python*/*-packages -type f -name '*.py' -exec sed -i -e 's|^#!/usr/bin/env python|#!/usr/bin/python3|' {} \;
+	find debian/tmp/usr/lib/python*/*-packages -type f -name '*.py' -exec sed -i -e 's|^#!/usr/bin/python.*|#!/usr/bin/python3|' {} \;
+	find debian/tmp/usr/lib/python*/*-packages -type f -name '*.py' | xargs grep -E -l -e '^#!/usr/bin/python3' | xargs chmod a+x
+	rm -rf debian/tmp/usr/lib/python*/*-packages/ansible_test/_data/sanity/pslint/pslint.ps1
+	rm -rf debian/tmp/usr/lib/python*/*-packages/ansible_test/_data/sanity/validate-modules/validate_modules/ps_argspec.ps1
+	rm -rf debian/tmp/usr/lib/python*/*-packages/tmp_test/_data/requirements/sanity.ps1
+	fdupes -s debian/tmp/usr/lib/python*/*-packages
+
+override_dh_auto_test:
+
+override_dh_auto_clean:
+
+%:
+	dh $@ --buildsystem=pybuild --with python3
