@@ -1,0 +1,3 @@
+python-ansible-core source: no-debian-changes
+python-ansible-core source: source-contains-prebuilt-windows-binary
+python-ansible-core source: source-package-encodes-python-version
