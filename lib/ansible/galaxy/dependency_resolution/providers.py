@@ -155,7 +155,7 @@ class CollectionDependencyProvider(AbstractProvider):
         return False
 
     def identify(self, requirement_or_candidate):
-        # type: (Candidate | Requirement) -> str
+        # type: (t.Union[Candidate, Requirement]) -> str
         """Given requirement or candidate, return an identifier for it.
 
         This is used to identify a requirement or candidate, e.g.
@@ -168,10 +168,12 @@ class CollectionDependencyProvider(AbstractProvider):
 
     def get_preference(
             self,  # type: CollectionDependencyProvider
-            resolution,  # type: Candidate | None
-            candidates,  # type: list[Candidate]
-            information,  # type: list[t.NamedTuple]
-    ):  # type: (...) -> float | int
+            identifier,  # type: str
+            resolutions,  # type: t.Mapping[str, Candidate]
+            candidates,  # type: t.Mapping[str, t.Iterator[Candidate]]
+            information,  # type: t.Mapping[str, t.Iterable[t.NamedTuple]]
+            backtrack_causes,  # type: t.Sequence
+    ):  # type: (...) -> t.Union[float, int]
         """Return sort key function return value for given requirement.
 
         This result should be based on preference that is defined as
@@ -215,6 +217,7 @@ class CollectionDependencyProvider(AbstractProvider):
         the value is, the more preferred this requirement is (i.e. the
         sorting function is called with ``reverse=False``).
         """
+        candidates = list(candidates[identifier])
         if any(
                 candidate in self._preferred_candidates
                 for candidate in candidates
@@ -224,8 +227,12 @@ class CollectionDependencyProvider(AbstractProvider):
             return float('-inf')
         return len(candidates)
 
-    def find_matches(self, requirements):
-        # type: (list[Requirement]) -> list[Candidate]
+    def find_matches(
+            self,  # type: CollectionDependencyProvider
+            identifier,  # type: str
+            requirements,  # type: t.Mapping[str, t.Iterator[Requirement]]
+            incompatibilities  # type: t.Mapping[str, t.Iterator[Candidate]]
+    ):  # type: (...) -> t.List[Candidate]
         r"""Find all possible candidates satisfying given requirements.
 
         This tries to get candidates based on the requirements' types.
@@ -250,6 +257,7 @@ class CollectionDependencyProvider(AbstractProvider):
         # FIXME: its cloned tmp dir. Using only the first one creates
         # FIXME: loops that prevent any further dependency exploration.
         # FIXME: We need to figure out how to prevent this.
+        requirements = list(requirements[identifier])
         first_req = requirements[0]
         fqcn = first_req.fqcn
         # The fqcn is guaranteed to be the same
