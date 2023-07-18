@@ -1,0 +1,12 @@
+usr/bin/ansible
+usr/bin/ansible-config
+usr/bin/ansible-connection
+usr/bin/ansible-console
+usr/bin/ansible-doc
+usr/bin/ansible-galaxy
+usr/bin/ansible-inventory
+usr/bin/ansible-playbook
+usr/bin/ansible-pull
+usr/bin/ansible-vault
+usr/lib/python*/*-packages/ansible
+usr/lib/python*/*-packages/ansible_core*
