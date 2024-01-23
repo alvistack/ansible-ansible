@@ -53,7 +53,6 @@ docs/docsite/_static/*.gif
 docs/docsite/_static/*.png
 docs/docsite/_static/websupport.js
 # deb building stuff...
-/debian/
 deb-build
 # Vim swap files
 *.swp
@@ -116,3 +115,5 @@ test/units/.coverage.*
 /SYMLINK_CACHE.json
 changelogs/.plugin-cache.yaml
 .ansible-test-timeout.json
+
+.pybuild/
