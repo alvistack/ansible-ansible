@@ -1,0 +1,7 @@
+*.substvars
+*debhelper*
+.debhelper
+ansible-core
+ansible-test
+files
+tmp

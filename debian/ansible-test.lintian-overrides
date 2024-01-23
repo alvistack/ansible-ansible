@@ -1,0 +1,6 @@
+ansible-test: copyright-without-copyright-notice
+ansible-test: initial-upload-closes-no-bugs
+ansible-test: no-manual-page
+ansible-test: script-not-executable
+ansible-test: unusual-interpreter
+ansible-test: zero-byte-file-in-doc-directory
