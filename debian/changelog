@@ -1,0 +1,5 @@
+python-ansible-core (100:2.18.0-1) UNRELEASED; urgency=medium
+
+  * https://github.com/ansible/ansible/releases/tag/v2.18.0
+
+ -- Wong Hoi Sing Edison <hswong3i@pantarei-design.com>  Tue, 05 Nov 2024 15:14:03 +0800
