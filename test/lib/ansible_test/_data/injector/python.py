@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 """Provides an entry point for python scripts and python modules on the controller with the current python interpreter and optional code coverage collection."""
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 # a script to check for illegal filenames on various Operating Systems. The
 # main rules are derived from restrictions on Windows

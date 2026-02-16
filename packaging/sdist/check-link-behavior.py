@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 """Checks for link behavior required for sdist to retain symlinks."""
 
 from __future__ import (absolute_import, division, print_function)

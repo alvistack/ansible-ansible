@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 """Show openssl version."""
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type

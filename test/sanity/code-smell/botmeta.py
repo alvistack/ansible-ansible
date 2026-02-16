@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 """Make sure the data in BOTMETA.yml is valid"""
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type

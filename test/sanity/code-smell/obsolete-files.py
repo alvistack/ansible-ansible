@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 """Prevent files from being added to directories that are now obsolete."""
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type

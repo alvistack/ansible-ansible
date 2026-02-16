@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # PYTHON_ARGCOMPLETE_OK
 
 # (c) 2020 Red Hat, Inc.

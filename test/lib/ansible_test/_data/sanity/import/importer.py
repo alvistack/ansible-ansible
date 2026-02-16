@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 """Import the given python module(s) and report error(s) encountered."""
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type

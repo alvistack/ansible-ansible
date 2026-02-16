@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # PYTHON_ARGCOMPLETE_OK
 """A tool to aggregate data about Ansible source and testing into a sqlite DB for reporting."""
 
