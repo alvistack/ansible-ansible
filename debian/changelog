@@ -1,0 +1,5 @@
+python-ansible-core (100:2.20.5-1) UNRELEASED; urgency=medium
+
+  * https://github.com/ansible/ansible/releases/tag/v2.20.5
+
+ -- Wong Hoi Sing Edison <hswong3i@pantarei-design.com>  Wed, 22 Apr 2026 11:34:07 +0800
