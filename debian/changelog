@@ -1,0 +1,5 @@
+python-ansible-core (100:2.19.13-1) UNRELEASED; urgency=medium
+
+  * https://github.com/ansible/ansible/releases/tag/v2.19.13
+
+ -- Wong Hoi Sing Edison <hswong3i@pantarei-design.com>  Wed, 09 Sep 2026 16:20:08 +0800
