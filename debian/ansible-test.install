@@ -1,0 +1,2 @@
+usr/bin/ansible-test
+usr/lib/python*/*-packages/ansible_test*
