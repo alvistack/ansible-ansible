@@ -1,0 +1,5 @@
+ansible-core: copyright-without-copyright-notice
+ansible-core: initial-upload-closes-no-bugs
+ansible-core: no-manual-page
+ansible-core: uses-dpkg-database-directly
+ansible-core: zero-byte-file-in-doc-directory
