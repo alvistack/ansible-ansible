@@ -10,11 +10,7 @@ authors = [
 ]
 description = "Radically simple IT automation"
 readme = "README.md"
-license = "GPL-3.0-or-later"
-license-files = [
-    "COPYING",
-    "licenses/*.txt",
-]
+license = {text = "GPL-3.0-or-later"}
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
